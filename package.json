@@ -1,0 +1,24 @@
+{
+  "name": "playwright-typescript-skeleton",
+  "version": "1.0.0",
+  "description": "A clean, modern Playwright + TypeScript automation framework skeleton for training and onboarding.",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:local": "dotenv -e .env.local -- playwright test",
+    "test:int": "dotenv -e .env.int -- playwright test",
+    "test:qa": "dotenv -e .env.qa -- playwright test",
+    "test:smoke": "dotenv -e .env.local -- playwright test tests/smoke",
+    "test:functional": "dotenv -e .env.local -- playwright test tests/functional",
+    "test:headed": "dotenv -e .env.local -- playwright test --headed",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^20.14.0",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
+    "typescript": "^5.5.0"
+  }
+}

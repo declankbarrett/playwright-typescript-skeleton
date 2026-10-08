@@ -1,0 +1,23 @@
+node_modules/
+dist/
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/blob-report/
+
+# Environment files (keep examples, ignore local overrides)
+.env
+.env.*.local
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
