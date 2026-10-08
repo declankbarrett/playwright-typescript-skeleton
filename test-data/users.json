@@ -1,14 +1,22 @@
 {
-  "validUser": {
-    "username": "standard_user",
-    "password": "secret_sauce"
+  "newUser": {
+    "name": "Alex",
+    "surname": "Morgan",
+    "email": "alex.morgan@test.com",
+    "position": "Test Engineer"
   },
-  "lockedOutUser": {
-    "username": "locked_out_user",
-    "password": "secret_sauce"
-  },
-  "invalidUser": {
-    "username": "invalid_user",
-    "password": "wrong_password"
+  "seededUsers": {
+    "developer": {
+      "name": "Anna",
+      "surname": "Nowak",
+      "email": "developer@test.com",
+      "position": "Senior Developer"
+    },
+    "businessAnalyst": {
+      "name": "Piotr",
+      "surname": "Wolski",
+      "email": "business@test.com",
+      "position": "Business Analyst"
+    }
   }
 }

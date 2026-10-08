@@ -1,0 +1,14 @@
+{
+  "newProject": {
+    "name": "Automation Platform",
+    "sector": "Commercial",
+    "technologies": ["TypeScript", "AWS"],
+    "startDate": "2025-01-15",
+    "ownerName": "Anna Nowak"
+  },
+  "seededProject": {
+    "name": "Example Project",
+    "sector": "Gov",
+    "technologies": "Java, TypeScript"
+  }
+}

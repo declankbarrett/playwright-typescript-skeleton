@@ -1,15 +1,22 @@
 import { test, expect } from '../../fixtures/testFixtures';
 
 test.describe('Functional: Navigation', () => {
-  test.beforeEach(async ({ loginPage, users }) => {
-    await loginPage.open();
-    await loginPage.login(users.validUser.username, users.validUser.password);
-  });
+  test('user can navigate from Users to Projects and back', async ({
+    page,
+    usersListPage,
+    projectsListPage,
+  }) => {
+    await usersListPage.open();
+    expect(await usersListPage.isDisplayed()).toBeTruthy();
 
-  test('user can navigate to the shopping cart', async ({ page, homePage }) => {
-    await homePage.goToCart();
+    await usersListPage.goToProjectsNav();
 
-    await expect(page).toHaveURL(/.*cart.html/);
-    await expect(page.locator('.title')).toHaveText('Your Cart');
+    await expect(page).toHaveURL(/.*projects\.html/);
+    expect(await projectsListPage.isDisplayed()).toBeTruthy();
+
+    await projectsListPage.goToUsersNav();
+
+    await expect(page).toHaveURL(/.*index\.html/);
+    expect(await usersListPage.isDisplayed()).toBeTruthy();
   });
 });

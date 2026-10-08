@@ -20,7 +20,7 @@ function getEnv(name: string, fallback?: string): string {
 }
 
 export const env: EnvironmentConfig = {
-  baseUrl: getEnv('BASE_URL', 'https://www.saucedemo.com'),
+  baseUrl: getEnv('BASE_URL', 'http://localhost:8081'),
   browser: getEnv('BROWSER', 'chromium'),
   headless: getEnv('HEADLESS', 'false') === 'true',
   timeout: Number(getEnv('TIMEOUT', '30000')),

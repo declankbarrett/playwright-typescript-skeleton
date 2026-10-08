@@ -41,4 +41,17 @@ export class BasePage {
   async title(): Promise<string> {
     return this.page.title();
   }
+
+  /**
+   * The top navigation bar ("Users" / "Projects") is shared across every
+   * page in the app, so navigation helpers live on BasePage rather than
+   * being duplicated per page object.
+   */
+  async goToUsersNav(): Promise<void> {
+    await this.click(this.page.getByRole('link', { name: 'Users' }));
+  }
+
+  async goToProjectsNav(): Promise<void> {
+    await this.click(this.page.getByRole('link', { name: 'Projects' }));
+  }
 }
