@@ -1,0 +1,21 @@
+{
+  "_comment": "SCAFFOLD ONLY — work item adhoc-20261008-users-search-filter. Synthetic test data for a Users-app feature that does not exist in this repository (see qa-work/adhoc-20261008-users-search-filter for rationale). Naming convention: realistic display names, no ticket numbers embedded, per dedup-rule.md.",
+  "seedUsers": [
+    { "name": "Anna", "surname": "Nowak", "email": "anna.nowak@example.test", "position": "Developer" },
+    { "name": "Jan", "surname": "Kowalski", "email": "jan.kowalski.dev@example.test", "position": "Developer" },
+    { "name": "Jan", "surname": "Kowalski", "email": "jan.kowalski.qa@example.test", "position": "Test Engineer" },
+    { "name": "Maria", "surname": "Wojcik", "email": "maria.wojcik@example.test", "position": "QA Lead" }
+  ],
+  "disposableRemoveUser": {
+    "name": "Tomasz",
+    "surname": "Zielinski",
+    "email": "tomasz.zielinski@example.test",
+    "position": "Developer"
+  },
+  "noMatchSearchTerm": "zzzznomatch",
+  "injectionPayloads": [
+    "' OR 1=1 --",
+    "%",
+    "_"
+  ]
+}
