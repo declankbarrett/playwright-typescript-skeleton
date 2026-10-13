@@ -1,6 +1,7 @@
 import { test as base } from '@playwright/test';
 import { UsersListPage } from '../pages/UsersListPage';
 import { ViewUserPage } from '../pages/ViewUserPage';
+import { AddUserPage, NewUser } from '../pages/AddUserPage';
 import { ProjectsListPage } from '../pages/ProjectsListPage';
 import { AddProjectPage, NewProject } from '../pages/AddProjectPage';
 import { ViewProjectPage } from '../pages/ViewProjectPage';
@@ -20,6 +21,8 @@ interface UserTestData {
     developer: SeededUser;
     businessAnalyst: SeededUser;
   };
+  newUserTemplate: Omit<NewUser, 'email'> & { email: string };
+  allowedPositions: string[];
 }
 
 interface ProjectTestData {
@@ -41,6 +44,7 @@ interface ProjectTestData {
 interface Fixtures {
   usersListPage: UsersListPage;
   viewUserPage: ViewUserPage;
+  addUserPage: AddUserPage;
   projectsListPage: ProjectsListPage;
   addProjectPage: AddProjectPage;
   viewProjectPage: ViewProjectPage;
@@ -57,6 +61,10 @@ export const test = base.extend<Fixtures>({
 
   viewUserPage: async ({ page }, use) => {
     await use(new ViewUserPage(page));
+  },
+
+  addUserPage: async ({ page }, use) => {
+    await use(new AddUserPage(page));
   },
 
   projectsListPage: async ({ page }, use) => {

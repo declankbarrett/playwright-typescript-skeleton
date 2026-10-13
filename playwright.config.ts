@@ -34,14 +34,25 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testIgnore: '**/tests/api/**',
     },
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      testIgnore: '**/tests/api/**',
     },
     {
       name: 'edge',
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
+      testIgnore: '**/tests/api/**',
+    },
+    // API-contract specs use Playwright's request fixture, not a browser,
+    // so they run once here rather than 3x across the browser projects
+    // above (see qa-work/adhoc-20261013-add-user/06_automation_plan.md,
+    // "CI impact - new tests/api/ location", Option A).
+    {
+      name: 'api',
+      testMatch: '**/tests/api/**',
     },
   ],
 });

@@ -6,6 +6,7 @@
 
 export interface EnvironmentConfig {
   baseUrl: string;
+  apiBaseUrl: string;
   browser: string;
   headless: boolean;
   timeout: number;
@@ -21,6 +22,9 @@ function getEnv(name: string, fallback?: string): string {
 
 export const env: EnvironmentConfig = {
   baseUrl: getEnv('BASE_URL', 'http://localhost:8081'),
+  // Test Application's backend API runs on a separate port from the
+  // frontend (see add-user-scripts.js API_URL); used by tests/api/*.
+  apiBaseUrl: getEnv('API_BASE_URL', 'http://localhost:8080'),
   browser: getEnv('BROWSER', 'chromium'),
   headless: getEnv('HEADLESS', 'false') === 'true',
   timeout: Number(getEnv('TIMEOUT', '30000')),

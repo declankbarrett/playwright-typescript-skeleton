@@ -12,5 +12,22 @@
       "email": "business@test.com",
       "position": "Business Analyst"
     }
-  }
+  },
+  "newUserTemplate": {
+    "name": "Alex",
+    "surname": "Morgan",
+    "email": "alex.morgan",
+    "position": "Test Engineer"
+  },
+  "allowedPositions": [
+    "Lead Test Engineer",
+    "Senior Test Engineer",
+    "Test Engineer",
+    "Junior Engineer",
+    "Lead Developer",
+    "Senior Developer",
+    "Test Developer",
+    "Junior Developer",
+    "Business Analyst"
+  ]
 }

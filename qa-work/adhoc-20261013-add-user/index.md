@@ -34,8 +34,8 @@ inputs:
 
 **Scope:** Single ticket, "Add User: create a new user from the UI" (`jira.md`), backlog refinement — test plan, scenarios and test cases ahead of sprint. No implementation exists yet in this repository or confirmed in any environment.
 **Branch / revision:** `feature/testing-ai-tool-existing-dev-work` @ `df9a439aa0cd25ed58318e0f5db23acb7dc7265b` (working tree; no separate implementation branch supplied or applicable — Story in refinement)
-**Workflow:** design
-**Updated:** 2026-10-13T20:15:00Z
+**Workflow:** design → automate (generate, review, run complete; see `10_test_generation.md`, `11_code_review.md`, `09_execution.md`)
+**Updated:** 2026-10-13T20:45:00Z
 
 ## Workflow step status and staleness
 
@@ -50,29 +50,33 @@ inputs:
 | design | Design review | Complete | `07_design_review.md` | `01`, `03`, `04`, `05` (as they stood before revision) | Fresh as a point-in-time review; remediation tracked in its own "Remediation record" section |
 | design | Final test plan | Complete (Draft, pending approval) | `outputs/08_test_plan.md` | `01`–`07` | Fresh |
 | full | Design checkpoint / approval | **Complete** | Gate log below | — | User approved 2026-10-13T20:11Z; test plan marked Final |
+| automate | Generate tests | Complete | `10_test_generation.md` | `04`, `06`, `08` + Test Application source (local Docker) @ 2026-10-13 | Fresh; TS05/TS11 deliberately not generated (still blocked) |
+| automate | Review test code | Complete — Pass | `11_code_review.md` | `10` | Fresh; `tsc --noEmit` clean, no findings |
+| automate | Run tests | Complete | `09_execution.md` | `10`, `11` + local Docker app (frontend :8081, backend :8080) @ 2026-10-13 | Fresh; 39/59 passed, 19/59 reproducible product-defect failures, 1/59 transient flake |
+| automate | Analyse failures | Complete | `09_execution.md` ("Classification" section) | `09` | Fresh; all 19 reproducible failures classified Product defect, 0 Test defect; no test files changed |
 
 ## Traceability matrix
 
 | FR/NFR | Existing evidence (test/assertion or gap) | Scenarios | Automation decision (assessed / automated / deliberately not automated, with reason) | Test files | Last result (run / environment / time) |
 |---|---|---|---|---|---|
-| FR1 | Gap — no test ever asserted the full 9-option list | TS02 | Automate — E2E, `tests/functional/add-user.spec.ts` | Not yet created | Not run |
-| FR2 | Gap — prior `add-user.spec.ts` covered this but was deleted (`df9a439`) | TS01, TS02 | Automate — E2E, same file | Not yet created | Not run |
-| FR3 | Gap — only 1 of 3 triggers ever tested, no longer present | TS03 | Automate — E2E, same file | Not yet created | Not run |
-| FR4 | Gap — never automated | TS04 | Automate — E2E, same file | Not yet created | Not run |
+| FR1 | Was a gap; now automated | TS02 | Automated — E2E, `tests/functional/add-user.spec.ts` | `tests/functional/add-user.spec.ts` | **PASS** (×3 browsers) — `local`, 2026-10-13T20:45Z |
+| FR2 | Was a gap; now automated | TS01, TS02 | Automated — E2E, same file | `tests/functional/add-user.spec.ts` | **PASS** (×3 browsers, incl. all 9 positions) — `local`, 2026-10-13T20:45Z |
+| FR3 | Was a gap; now automated | TS03 | Automated — E2E, same file | `tests/functional/add-user.spec.ts` | **Mixed** — empty-Name sub-case PASS; placeholder-Position and invalid-email sub-cases **FAIL** (product defect: no real validation exists) — `local`, 2026-10-13T20:45Z |
+| FR4 | Was a gap; now automated | TS04 | Automated — E2E, same file | `tests/functional/add-user.spec.ts` | **FAIL** both sub-cases (product defect: no AJAX error handling / case-sensitive-only duplicate check) — `local`, 2026-10-13T20:45Z |
 | FR5 | Gap — never automated | TS05 | Automate (blocked) — pending server-error trigger mechanism | Not yet created | Not run |
-| FR6 | Gap — never automated | TS06 | Automate — E2E, same file | Not yet created | Not run |
-| FR7 | Gap — no API tests exist in this repo | TS07 | Automate — Integration, new `tests/api/add-user.contract.spec.ts` | Not yet created | Not run |
-| FR8 | Gap — no API tests exist | TS08 | Automate — Integration, same new file | Not yet created | Not run |
-| FR9 | Gap — no API tests exist | TS09 | Automate — Integration, same new file | Not yet created | Not run |
-| FR10 | Gap — no API tests exist; no trigger mechanism confirmed | TS11 | Automate (blocked) — pending server-error trigger mechanism | Not yet created | Not run |
-| FR11 | Gap — DB is external/unreachable; only observable behaviourally | TS04, TS09 | Automate — via FR4/FR9's automation decisions | Not yet created | Not run |
-| NFR1 | Gap — never exercised | TS10 | Automate — Integration, same new file | Not yet created | Not run |
+| FR6 | Was a gap; now automated | TS06 | Automated — E2E, same file | `tests/functional/add-user.spec.ts` | **Mixed** — diacritic (Zoë) sub-case PASS; apostrophe (O'Brien) sub-case **FAIL** (product defect: non-parameterised SQL) — `local`, 2026-10-13T20:45Z |
+| FR7 | Was a gap; now automated | TS07 | Automated — Integration, `tests/api/add-user.contract.spec.ts` | `tests/api/add-user.contract.spec.ts` | **PASS** — `local`, 2026-10-13T20:45Z |
+| FR8 | Was a gap; now automated | TS08 | Automated — Integration, same new file | `tests/api/add-user.contract.spec.ts` | **FAIL** both sub-cases (product defect: no server-side validation, no 400 path) — `local`, 2026-10-13T20:45Z |
+| FR9 | Was a gap; now automated | TS09 | Automated — Integration, same new file | `tests/api/add-user.contract.spec.ts` | **FAIL** (product defect: duplicate email returns 404, not 409) — `local`, 2026-10-13T20:45Z |
+| FR10 | Gap — no trigger mechanism confirmed | TS11 | Automate (blocked) — pending server-error trigger mechanism | Not yet created | Not run |
+| FR11 | Was a gap; now automated | TS04, TS09 | Automated — via FR4/FR9's automation decisions | `tests/functional/add-user.spec.ts`, `tests/api/add-user.contract.spec.ts` | **FAIL** (product defect: case-sensitive-only duplicate check; 404 not 409) — `local`, 2026-10-13T20:45Z |
+| NFR1 | Was a gap; now automated | TS10 | Automated — Integration, same new file | `tests/api/add-user.contract.spec.ts` | **FAIL** (product defect: non-parameterised SQL breaks on apostrophe/injection payload) — `local`, 2026-10-13T20:45Z |
 
 ## QA Summary
 
 | Ticket | Readiness | Max risk | Coverage verdict | Scenarios written/not written | Automated/manual/not needed | Run result | Published |
 |---|---|---|---|---|---|---|---|
-| adhoc-20261013-add-user (Add User) | 🟡 Amber | HIGH | Insufficient (pre-design; 11/11 scenarios now designed) | 11 written / 0 not written | 9 automate, 2 automate (blocked — TS05, TS11), 0 manual-only, 0 not needed | Not run | Not published |
+| adhoc-20261013-add-user (Add User) | 🟡 Amber | HIGH | Sufficient for 9/11 scenarios; 2/11 (TS05, TS11) still blocked | 11 written / 0 not written | 9 automated and run, 2 automate (blocked — TS05, TS11), 0 manual-only, 0 not needed | **39/59 passed, 19/59 reproducible FAIL (product defects), 1/59 transient flake** | Not published |
 
 ## Open questions
 
