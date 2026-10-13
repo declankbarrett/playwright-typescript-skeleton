@@ -1,6 +1,5 @@
 import { test as base } from '@playwright/test';
 import { UsersListPage } from '../pages/UsersListPage';
-import { AddUserPage, NewUser } from '../pages/AddUserPage';
 import { ViewUserPage } from '../pages/ViewUserPage';
 import { ProjectsListPage } from '../pages/ProjectsListPage';
 import { AddProjectPage, NewProject } from '../pages/AddProjectPage';
@@ -17,7 +16,6 @@ interface SeededUser {
 }
 
 interface UserTestData {
-  newUser: NewUser;
   seededUsers: {
     developer: SeededUser;
     businessAnalyst: SeededUser;
@@ -42,7 +40,6 @@ interface ProjectTestData {
  */
 interface Fixtures {
   usersListPage: UsersListPage;
-  addUserPage: AddUserPage;
   viewUserPage: ViewUserPage;
   projectsListPage: ProjectsListPage;
   addProjectPage: AddProjectPage;
@@ -56,10 +53,6 @@ interface Fixtures {
 export const test = base.extend<Fixtures>({
   usersListPage: async ({ page }, use) => {
     await use(new UsersListPage(page));
-  },
-
-  addUserPage: async ({ page }, use) => {
-    await use(new AddUserPage(page));
   },
 
   viewUserPage: async ({ page }, use) => {

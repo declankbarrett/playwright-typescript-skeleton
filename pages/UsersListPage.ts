@@ -7,7 +7,6 @@ import { BasePage } from './BasePage';
  */
 export class UsersListPage extends BasePage {
   private readonly pageHeading = this.page.getByRole('heading', { name: 'List of the users' });
-  private readonly addUserButton = this.page.getByRole('link', { name: 'Add new user' });
   private readonly usersTableRows = this.page.locator('#users-table-body tr');
 
   constructor(page: Page) {
@@ -20,10 +19,6 @@ export class UsersListPage extends BasePage {
 
   async isDisplayed(): Promise<boolean> {
     return this.isVisible(this.pageHeading);
-  }
-
-  async goToAddUser(): Promise<void> {
-    await this.click(this.addUserButton);
   }
 
   async getUserRowCount(): Promise<number> {

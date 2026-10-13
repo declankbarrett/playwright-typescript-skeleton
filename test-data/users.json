@@ -1,10 +1,4 @@
 {
-  "newUser": {
-    "name": "Alex",
-    "surname": "Morgan",
-    "email": "alex.morgan@test.com",
-    "position": "Test Engineer"
-  },
   "seededUsers": {
     "developer": {
       "name": "Anna",
