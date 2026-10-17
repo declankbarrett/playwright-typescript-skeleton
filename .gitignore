@@ -21,11 +21,3 @@ npm-debug.log*
 # IDE
 .idea/
 .vscode/
-
-# ai-qa:start
-qa-work/**
-!qa-work/*/
-!qa-work/*/index.md
-!qa-work/*/outputs/
-!qa-work/*/outputs/**
-# ai-qa:end
