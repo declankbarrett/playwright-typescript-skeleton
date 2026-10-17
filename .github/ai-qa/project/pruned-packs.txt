@@ -1,0 +1,6 @@
+cucumber-java
+cypress-ts
+jest-vitest
+junit5-restassured
+pytest
+selenium-java
